@@ -19,7 +19,7 @@ Open the keystone_admin file and note the password <ADMIN_PASSWORD>.
 Horizon Login
 
 Using the IP address assigned above, connect and log into the Horizon web interface at
-* http://<YOUR_OPENSTACK_IP/dashboard
+* http://<YOUR_OPENSTACK_IP/horizon
 * Domain: default
 * User Name: admin
 * Password: <ADMIN_PASSWORD>
