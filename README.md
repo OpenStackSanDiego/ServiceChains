@@ -36,7 +36,7 @@ Please refer to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/
 * TODO - add in external subnet via Horizon
 * TODO - setup virtual router interfaces
 * TODO - setup routing on controller host and assign IPs to loopbackasdf
-*
+* TODO - lookup local IP and enable SSH and HTTP traffic via network security groups
 
 Network Setup
 
@@ -45,7 +45,13 @@ Three IP subnets will be required. Using either Horizon or the command line, cre
 * Blue Network -  192.168.100.0/24   DHCP range 192.168.100.100,192.168.100.200
 * Green Network - 192.168.200.0/24   DHCP range 192.168.200.100,192.168.200.200
 * Red Network   - 192.168.300.0/24   DHCP range 192.168.300.100,192.168.300.200
+* Create a router and attach it to the Blue, Green, Red and ext-net networks
 
+Test External Network Setup
+
+* Start a Cirros (tiny) image and attach to the blue network
+* Associate a floating IP to the new Cirros image
+* Connect to the Cirros image using SSH from your laptop  with username: cirros and password: cubswin:)
 
 Exercise One - Poor Man's Web Filter
 
