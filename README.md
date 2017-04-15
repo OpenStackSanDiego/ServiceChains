@@ -24,6 +24,20 @@ Using the IP address assigned above, connect and log into the Horizon web interf
 * User Name: admin
 * Password: <ADMIN_PASSWORD>
 
+External Network Setup
+
+Each workshop lab environment has been allocated a set of IP addresses with external connectivity.
+These IP addresses need to be setup within OpenStack.
+
+Please refer to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/blob/master/Workshop%20External%20Subnets.csv">Workshop External Subnets"</A> to find your assigned IP addresses.
+
+* Lookup your assigned subnet
+* TODO - remove existing external subnet
+* TODO - add in external subnet via Horizon
+* TODO - setup virtual router interfaces
+* TODO - setup routing on controller host and assign IPs to loopbackasdf
+*
+
 Network Setup
 
 Three IP subnets will be required. Using either Horizon or the command line, create the following three networks and associated subnets.
