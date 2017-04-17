@@ -10,23 +10,11 @@ variable "packet_project_id" {
 }
 
 variable "server_count" {
-  description = "Total running servers"
+  description = "Total labs desired"
   default = 2
 }
 
 variable "ssh-timeout" {
   description = "ssh timeout"
   default = "900s"
-}
-
-variable "server_ip" {
-  type    = "map"
-  default = {
-	ubuntu001 = "10.10.10.1"
-        ubuntu002 = "10.10.10.2"
-        ubuntu003 = "10.10.10.3"
-        ubuntu004 = "10.10.10.4"
-        ubuntu005 = "10.10.10.5"
-        ubuntu006 = "10.10.10.6"
-  }
 }

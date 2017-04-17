@@ -1,3 +1,4 @@
+# somewhat recent version is needed for DNSimple
 terraform {
   required_version = ">= 0.9.3"
 }
@@ -5,7 +6,7 @@ terraform {
 resource "packet_device" "controller" {
   count = "${var.server_count}"
 
-  hostname = "${format("ubuntu%03d", count.index + 1)}"
+  hostname = "${format("lab%03d", count.index + 1)}"
 
   plan = "baremetal_1"
   facility = "ewr1"
@@ -13,16 +14,12 @@ resource "packet_device" "controller" {
   billing_cycle = "hourly"
   project_id = "${var.packet_project_id}"
 
-#  var.server_ip["${hostname}"] = "${network.0.address}"
-#  var.server_ip[packet_device.hostname] = "20.20.20.20"
-#  var.server_ip["${element(packet_device.controller.*.hostname, count.index)}"] = "20.20.20.20"
-
   connection {
         type = "ssh"
         user = "root"
         port = 22
         timeout = "${var.ssh-timeout}"
-        private_key = "${file("OpenStackWorkshop-id_rsa")}"
+        private_key = "${file("~/.ssh/OpenStackWorkshop.rsa")}"
   }
 
   provisioner "file" {
@@ -43,7 +40,7 @@ resource "dnsimple_record" "controller" {
 
   domain = "openstacksandiego.us"
   name   = "${element(packet_device.controller.*.hostname, count.index)}"
-  value   = "${lookup(var.server_ip,element(packet_device.controller.*.hostname, count.index))}"
+  value  = "${element(packet_device.controller.*.network.0.address, count.index)}"
 
   type   = "A"
   ttl    = 3600
