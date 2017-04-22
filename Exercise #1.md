@@ -8,6 +8,11 @@ Prereq
   * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
   * http://www.whatsmyip.org/
   
+Network
+
+| Network Name  | Subnet         | DHCP Range  
+| ------------- |:-------------:| -------:|
+| internal      | 192.168.2.0/24 | 192.168.2.10,192.168.2.20 |
 
 Instances
 
