@@ -6,7 +6,7 @@ terraform {
 resource "packet_device" "controller" {
   count = "${var.server_count}"
 
-  hostname = "${format("lab%03d", count.index + 1)}"
+  hostname = "${format("ewr%03d", count.index + 1)}"
 
   plan = "baremetal_1"
   facility = "ewr1"

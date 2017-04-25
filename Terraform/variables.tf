@@ -11,7 +11,7 @@ variable "packet_project_id" {
 
 variable "server_count" {
   description = "Total labs desired"
-  default = 2
+  default = 3
 }
 
 variable "ssh-timeout" {

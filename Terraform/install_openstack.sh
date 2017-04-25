@@ -22,9 +22,29 @@ ansible-playbook -i localhost, -c local playbooks/allinone/midonet-allinone.yml
 
 . /root/keystonerc_admin
 
-wget -q http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2.xz
-unxz CentOS-7-x86_64-GenericCloud.qcow2.xz
-glance --os-image-api-version 2 image-create --protected True --name CentOS7 --visibility public --disk-format raw --container-format bare --file CentOS-7-x86_64-GenericCloud.qcow2
+IMAGE_SERVER=shell.openstacksandiego.us
 
-wget -q http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
-glance --os-image-api-version 2 image-create --protected True --name cirros --visibility public --disk-format raw --container-format bare --file cirros-0.3.5-x86_64-disk.img
+IMG_FILE=CentOS-7-x86_64-GenericCloud.qcow2
+IMG_NAME=CentOS7
+wget -q -O - http://$IMAGE_SERVER/Images/$IMG_FILE | \
+glance --os-image-api-version 2 image-create --protected True --name $IMG_NAME --visibility public --disk-format raw --container-format bare
+
+IMG_FILE=xenial-server-cloudimg-amd64-disk1.img
+IMG_NAME=Ubuntu14_04
+wget -q -O - http://$IMAGE_SERVER/Images/$IMG_FILE | \
+glance --os-image-api-version 2 image-create --protected True --name $IMG_NAME --visibility public --disk-format raw --container-format bare
+
+IMG_FILE=CirrosWeb.img
+IMG_NAME=CirrosWeb
+wget -q -O - http://$IMAGE_SERVER/Images/$IMG_FILE | \
+glance --os-image-api-version 2 image-create --protected True --name $IMG_NAME --visibility public --disk-format raw --container-format bare
+
+IMG_FILE=pfSense-small.img
+IMG_NAME=pfSense
+wget -q -O - http://$IMAGE_SERVER/Images/$IMG_FILE | \
+glance --os-image-api-version 2 image-create --protected True --name $IMG_NAME --visibility public --disk-format raw --container-format bare
+
+IMG_FILE=NetMon.img
+IMG_NAME=NetMon
+wget -q -O - http://$IMAGE_SERVER/Images/$IMG_FILE | \
+glance --os-image-api-version 2 image-create --protected True --name $IMG_NAME --visibility public --disk-format raw --container-format bare
