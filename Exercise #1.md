@@ -6,32 +6,20 @@ Image login info:
 
 Prereq
   * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
-  * http://www.whatsmyip.org/
-  
-Network
-
-| Network Name  | Subnet         | DHCP Range  
-| ------------- |:-------------:| -------:|
-| internal      | 192.168.2.0/24 | 192.168.2.10,192.168.2.20 |
+  * Setup the external and internal networking
 
 Instances
 
-| Instance Name | Image         | Flavor  | Network  |
-| ------------- |:-------------:| -------:|---------:|
-| Client        | Cirros        | m1.tiny | Internet |
-| WebServer     | Cirros        | m1.tiny | Internet |
-| NetTools      | NetTools      | m1.tiny | Internet |
+Startup the following three images and assign floating IPs to all.
 
-Startup Three Image
+| Instance Name | Image         | Flavor  | Network  | Floating IP |
+| ------------- |:-------------:| -------:|---------:|------------:|
+| Client        | CirrosWeb     | m1.tiny | internal |  assign     |
+| WebServer     | CirrosWeb     | m1.tiny | internal |  assign     |
+| NetMon        | NetMon        | m1.small| internal |  assign     |
 
-* CirrosClient (Image: CirrosImage flavor tiny network: internal
-* CirrosWebServer image (Image: CirrosImage flavor tiny network: internal)
 
-Startup One CentOS monitoring agent
-
-* NetworkMonitoringTools image (flavor small network: internal)
-
-Assign floating IPs all three instances
+Assign floating IPs all three instances.
 
 Log into CirrosWebServer
 su to root (sudo su -)
