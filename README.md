@@ -50,6 +50,9 @@ Please refer to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/
 
 Test External Network Setup
 
+For instructions on how to launch instances, please see:
+https://docs.openstack.org/user-guide/dashboard-launch-instances.html
+
 * Start a Cirros (tiny) image and attach to the internal network
 
 | Instance Name | Image         | Flavor  | Network  |
