@@ -58,7 +58,7 @@ glance --os-image-api-version 2 image-create --protected True --name $IMG_NAME -
 
 # enable password logins - password is hostname | openstack
 ADMIN_PASSWORD=`hostname`openstack
-useradd -g sudo -p openstack admin
+useradd -g sudo -p $ADMIN_PASSWORD admin
 sed -i "/PasswordAuthentication no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
 service ssh restart
 
