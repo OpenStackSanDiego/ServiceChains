@@ -50,8 +50,15 @@ Please refer to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/
 
 Test External Network Setup
 
-* Start a Cirros (tiny) image and attach to the blue network
+* Start a Cirros (tiny) image and attach to the internal network
+
+| Instance Name | Image         | Flavor  | Network  |
+| ------------- |:-------------:| -------:|---------:|
+| Client        | CirrosWeb     | m1.tiny | Internal |
+
 * Associate a floating IP to the new Cirros image
-* Connect to the Cirros image using SSH from your laptop  with username: admin and password: openstack
+* Connect to the Cirros image using SSH from your laptop with username: admin and password: openstack
+
+If you can login OK, then external networking is all setup and you can proceed to exercise #1.
 
 
