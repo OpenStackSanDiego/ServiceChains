@@ -1,0 +1,14 @@
+EXTERNAL_NETWORK_CIDR="147.75.69.0/29"
+SUBNET_NAME=$EXTERNAL_NETWORK_CIDR
+FLOATING_IP_START="147.75.69.2"
+FLOATING_IP_END="147.75.69.6"
+EXTERNAL_NETWORK_GATEWAY="147.75.69.1"
+
+neutron subnet-create ext-net $EXTERNAL_NETWORK_CIDR --name $SUBNET_NAME \
+  --allocation-pool start=$FLOATING_IP_START,end=$FLOATING_IP_END \
+  --disable-dhcp --gateway $EXTERNAL_NETWORK_GATEWAY
+
+neutron router-interface-add edge-router $EXTERNAL_NETWORK_CIDR
+
+ip route add $EXTERNAL_NETWORK_CIDR via 172.19.0.2 dev uplinkbridge
+
