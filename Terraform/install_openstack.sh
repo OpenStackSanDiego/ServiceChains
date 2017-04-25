@@ -56,6 +56,12 @@ IMG_NAME=NetMon
 wget -q -O - http://$IMAGE_SERVER/Images/$IMG_FILE | \
 glance --os-image-api-version 2 image-create --protected True --name $IMG_NAME --visibility public --disk-format raw --container-format bare
 
+IMG_FILE=IoT.img
+IMG_NAME=IoT
+wget -q -O - http://$IMAGE_SERVER/Images/$IMG_FILE | \
+glance --os-image-api-version 2 image-create --protected True --name $IMG_NAME --visibility public --disk-format raw --container-format bare
+
+
 # enable password logins
 adduser admin --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 echo "admin:openstack" | sudo chpasswd
