@@ -21,6 +21,16 @@ resource "packet_device" "controller" {
         timeout = "${var.ssh-timeout}"
         private_key = "${file("~/.ssh/OpenStackWorkshop.rsa")}"
   }
+  
+  provisioner "file" {
+    source      = "int-net.sh"
+    destination = "int-net.sh"
+  }
+  
+  provisioner "file" {
+    source      = "ext-net.sh"
+    destination = "ext-net.sh"
+  }
 
   provisioner "file" {
     source      = "install_openstack.sh"
