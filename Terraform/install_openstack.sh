@@ -22,6 +22,13 @@ ansible-playbook -i localhost, -c local playbooks/allinone/midonet-allinone.yml
 
 . /root/keystonerc_admin
 
+# blow out the 200.200.200.0/24 example created by Aomi
+ROUTER=edge-router
+SUBNET=$(neutron router-port-list -F fixed_ips $ROUTER | grep '"ip_address": "200.200.200.1"' | awk '{print $3}' | tr -d '\n",')
+neutron router-interface-delete $ROUTER $SUBNET
+neutron subnet-delete $SUBNET
+
+
 IMAGE_SERVER=shell.openstacksandiego.us
 
 IMG_FILE=CentOS-7-x86_64-GenericCloud.qcow2
