@@ -51,7 +51,7 @@ Please refer to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/
 
 * Update network access rules to allow SSH & HTTP
 ** Add your external IP address to the network access rules for TCP ports 22 (SSH) and 80 (HTTP)
-** http://www.whatsmyip.org/ will tell you your external IP address
+** https://ifconfig.co// will tell you your external IP address
 ** Compute->Access & Security->Manage Rules->+ Add Rule
 ** Rule: SSH CIDR: YOUR_IP
 ** Rule: HTTP CIDR: YOUR_IP
