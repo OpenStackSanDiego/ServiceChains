@@ -2,7 +2,7 @@
 
 Overview
 
-This workshop will teach you how to use network rule chains to push traffic through security functions. This allows 
+This workshop will teach you how to use network rule chains to push traffic through security functions. This allows security functions, such as network monitors, IDS/IPS, web filters and web proxies, to be placed inline with the network traffic without having to route traffic through layer 3 IPs.
 
 As part of this workshop, each attendee will be assigned a physical server running their own private OpenStack cloud. This physical server can be access via SSH or the Horizon GUI. Each physical server has 32 GB of RAM and 6 floating IP addresses. This allows six virtual machines to run comfortably in the cloud. The floating IP addresses allow remote network access to the virtual machines.
 
