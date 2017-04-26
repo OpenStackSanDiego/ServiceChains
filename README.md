@@ -20,7 +20,10 @@ Using the IP address assigned above, connect using an SSH client to the OpenStac
 
 Once logged into the physical server, view the keystone_admin file and note the password <ADMIN_PASSWORD>.
 
-* cat keystone_admin
+```bash
+$ sudo su -
+# cat keystone_admin
+```
 
 Horizon Login
 
@@ -38,16 +41,24 @@ These IP addresses need to be setup within OpenStack.
 Please refer to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/blob/master/Workshop%20External%20Subnets.csv">Workshop External Subnets"</A> to find your assigned IP addresses. We've provided some scripts to setup the external and internal networking. However, you'll need to update the external networking script with your specific assigned IP addresses.
 
 * Load the OpenStack priviledges
-** Source ~/keystone_admin.sh
+```bash
+$ sudo su -
+# source ~/keystone_admin.sh
+```
 
 * Add an external floating IP network
 ** Edit the ext-net.sh with the assigned IP range from the Workshop External Subnet above
 ** Source ext-net.sh to setup the floating IP addresses
-** sh ext-net.sh
+```
+# vi ext-net.sh
+# source ext-net.sh
+```
 
 * Add an internal tenant network
 ** Source int-net.sh to setup the internal tenant network
-** sh int-net.sh
+```bash
+# source int-net.sh
+```
 
 * Update network access rules to allow SSH & HTTP
 ** Add your external IP address to the network access rules for TCP ports 22 (SSH) and 80 (HTTP)
