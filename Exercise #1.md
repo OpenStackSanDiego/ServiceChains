@@ -19,15 +19,36 @@ Prereq
   * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
   * Setup the external and internal networking
 
+Network Setup
+
+The NetMon machine will need multiple ports to process the traffic.
+
+Log into the OpenStack controller via SSH
+Your lab controller will be of the form ewrXXX.openstacksandiego.us
+Replace XXX with your lab number and include the leading zeroes (i.e. ewr007.openstacksandiego.us)
+Use the admin/openstack credential
+
+Load the OpenStack credentials
+```bash
+source keystonerc_admin
+```
+
+Create ports to use for the NetMon machine.
+```bash
+neutron port-create --name p1 internal
+neutron port-create --name p2 internal
+neutron port-create --name p3 internal
+```
+
 Instances
 
 Startup the following three images and assign floating IPs to all.
 
-| Instance Name | Image         | Flavor  | Network  | Floating IP |
-| ------------- |:-------------:| -------:|---------:|------------:|
-| Client        | CirrosWeb     | m1.tiny | internal |  assign     |
-| WebServer     | CirrosWeb     | m1.tiny | internal |  assign     |
-| NetMon        | NetMon        | m1.small| internal |  assign     |
+| Instance Name | Image         | Flavor  | Network  | Floating IP |Additional Interfaces|
+| ------------- |:-------------:| -------:|---------:|------------:|--------------------:|
+| Client        | CirrosWeb     | m1.tiny | internal |  assign     | none                |
+| WebServer     | CirrosWeb     | m1.tiny | internal |  assign     | none                |
+| NetMon        | NetMon        | m1.small| internal |  assign     | p1, p2, p3          |
 
 
 Assign floating IPs all three instances.
@@ -45,6 +66,9 @@ Verify that the client can connect to the web server on the CirrosWebServer
 $ curl 192.168.2.11
 
 It should return the hostname.
+
+
+```
 
 Log into NetworkMonitor 
 
