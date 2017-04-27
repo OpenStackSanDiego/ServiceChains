@@ -69,3 +69,7 @@ adduser admin sudo
 sed -i "/PasswordAuthentication no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
 service ssh restart
 
+# copy over the OpenStack credentials into the new admin account
+cp ~root/keystonerc_admin ~admin/
+chown admin ~admin/keystonerc_admin
+
