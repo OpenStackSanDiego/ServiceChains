@@ -21,7 +21,7 @@ Prereq
 
 Network Setup
 
-The NetMon machine will need multiple ports to process the traffic.
+The NetMon machine will need multiple ports: at least one for management and one for data to process the traffic.
 
 Log into the OpenStack controller via SSH
 Your lab controller will be of the form ewrXXX.openstacksandiego.us
@@ -33,22 +33,27 @@ Load the OpenStack credentials
 source keystonerc_admin
 ```
 
-Create ports to use for the NetMon machine.
+Create ports to use for the NetMon machine, or alternatively use Horizon to attach the NetMon image to the correct network.
+Note: the management and data port can be inconspicuous to the web-server's network. The administrator has the discretion to attach the NetMon interfaces on separate networks. If desired, NetMon management and service-port networks can be created prior to launching the NetMon image.
+
 ```bash
 neutron port-create --name p1 internal
 neutron port-create --name p2 internal
 neutron port-create --name p3 internal
 ```
 
+
+
+
 Instances
 
 Startup the following three images and assign floating IPs to all.
 
-| Instance Name | Image         | Flavor  | Network  | Floating IP |Additional Interfaces|
-| ------------- |:-------------:| -------:|---------:|------------:|--------------------:|
-| Client        | CirrosWeb     | m1.tiny | internal |  assign     | none                |
-| WebServer     | CirrosWeb     | m1.tiny | internal |  assign     | none                |
-| NetMon        | NetMon        | m1.small| internal |  assign     | p1, p2, p3          |
+| Instance Name | Image         | Flavor  | Network(s)      | Floating IP |Additional Interfaces|
+| ------------- |:-------------:| -------:|----------------:|------------:|--------------------:|
+| Client        | CirrosWeb     | m1.tiny | internal        |  assign     | none                |
+| WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | none                |
+| NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | p1, p2, p3          |
 
 
 Assign floating IPs all three instances.
