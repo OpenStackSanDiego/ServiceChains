@@ -67,6 +67,7 @@ This command is available as "hostname-webserver.sh"
 Log into CirrosClient
 
 Verify that the client can connect to the web server on the CirrosWebServer (curl <web-server_IP>), e.g.:
+
 ```$ curl 192.168.2.11```
 
 It should return the hostname.
