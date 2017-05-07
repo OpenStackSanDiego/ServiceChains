@@ -33,18 +33,6 @@ Load the OpenStack credentials
 source keystonerc_admin
 ```
 
-Create ports to use for the NetMon machine, or alternatively use Horizon to attach the NetMon image to the correct network.
-Note: the management and data port can be inconspicuous to the web-server's network. The administrator has the discretion to attach the NetMon interfaces on separate networks. If desired, NetMon management and service-port networks can be created prior to launching the NetMon image.
-
-```bash
-neutron port-create --name p1 internal
-neutron port-create --name p2 internal
-neutron port-create --name p3 internal
-```
-
-
-
-
 Instances
 
 Startup the following three images and assign floating IPs to all.
@@ -55,8 +43,16 @@ Startup the following three images and assign floating IPs to all.
 | WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | none                |
 | NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | p1, p2, p3          |
 
+Create ports to use for the NetMon machine, or alternatively use Horizon to attach the NetMon image to the correct network.
+Note: the management and data port can be inconspicuous to the web-server's network. The administrator has the discretion to attach the NetMon interfaces on separate networks. If desired, NetMon management and service-port networks can be created prior to launching the NetMon image.
 
-Assign floating IPs all three instances.
+```bash
+neutron port-create --name p1 internal
+neutron port-create --name p2 internal
+neutron port-create --name p3 internal
+```
+
+Assign floating IPs all three instances (specifically the management interface of the NetMon).
 
 Log into CirrosWebServer
 su to root (sudo su -)
@@ -67,31 +63,40 @@ This command is available as "hostname-webserver.sh"
 
 Log into CirrosClient
 
-Verify that the client can connect to the web server on the CirrosWebServer
+Verify that the client can connect to the web server on the CirrosWebServer (curl <web-server_IP>), e.g.:
 $ curl 192.168.2.11
 
 It should return the hostname.
 
-
-```
 
 Log into NetworkMonitor 
 
 Run a TCPDump to monitor for traffic to the client.
 
 # tcpdump dst 192.168.100.X
+or
+# tcpdump -i eth1
 
 # snort dst 192.168.100.X
 
+
 Rerun the curl and validate that the NetworkMonitor does not see the traffic
 
-Setup Port Networking
 
-Setup OpenStack networking to chain traffic destined for the WebServer via the NetworkMonitor
+Service Chaining
+
+Next, use MidoNet l2insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon image for inspection of web-server traffic.
+Retrieve the UUID of both the web-server and NetMon instance's network ports. This can be retrieved via Horizon or neutron-cli. Also note the web-server MAC address for service chaining configuration.
+# neutron port-list
+
+Log into midonet-cli to configure l2insertion of the NetMon image, to protect the web-server
+# midonet-cli
+midonet-cli> list l2insertion
+midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-open true mac <web-server_MAC>
 
 Rerun the curl and validate that the NetworkMonitor _does_ see the traffic
 
-
+```
 Notes...
 
 Layer 3 versus layer 2 - running nc on NetMon would not get the traffic
