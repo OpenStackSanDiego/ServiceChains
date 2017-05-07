@@ -11,10 +11,12 @@ In this first exercise we'll be adding a rule to move traffic through a virtual 
   * Utilize service chains to monitor the packet flows
 
 # Prereq
-##Networking Setup
+
+## Networking Setup
   * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
   * Setup the external and internal networking
-##Image login info
+  
+## Image login info
   * admin/openstack for the CirrosWeb image
   * admin/openstack for the NetMon image
   * admin/openstack for the physical server
