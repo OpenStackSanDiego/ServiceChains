@@ -6,7 +6,7 @@ This workshop will teach you how to use network rule chains to push traffic thro
 
 As part of this workshop, each attendee will be assigned a physical server running their own private OpenStack cloud. This physical server can be access via SSH or the Horizon GUI. Each physical server has 32 GB of RAM and 6 floating IP addresses. This allows six virtual machines to run comfortably in the cloud. The floating IP addresses allow remote network access to the virtual machines.
 
-The Midonet neutron plugin has been installed to allow the service chaining. For more information about rule chains in Midonet, please read: https://docs.midonet.org/docs/latest/operations-guide/content/rule_chains.html
+The MidoNet neutron plugin has been installed to allow the service chaining. For more information about rule chains in MidoNet, please read: https://docs.midonet.org/docs/latest-en/operations-guide/content/index.html
 
 This workshop consists of a number of exercises going from the basics through more advanced configurations. Once you've completed the steps below to familiarize your self and configure the lab, please proceed to the exercises.
 
