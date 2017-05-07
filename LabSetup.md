@@ -22,10 +22,11 @@ Lab Details
 
 Using the IP address assigned above, connect using an SSH client to the OpenStack controller using an SSH client such as PuTTY. PuTTY for Windows can be downloaded at http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html.
 
-Once logged into the physical server, view the keystone_admin file and note the password <ADMIN_PASSWORD>.
+* ssh to your physical server (ewrXXX.openstacksandiego.us) replacing XXX with your lab number.
+
+Once logged into the physical server, view the keystone_admin file and note the password. The password is set as the variable OS_PASSWORD (export OS_PASSWORD=<ADMIN_PASSWORD>).
 
 ```bash
-$ sudo su -
 # cat keystone_admin
 ```
 
