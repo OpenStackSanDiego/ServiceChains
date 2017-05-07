@@ -91,7 +91,10 @@ Rerun the curl and validate that the NetworkMonitor does not see the traffic
 
 Next, use MidoNet l2insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon instance for inspection of web-server traffic.
 Retrieve the UUID of both the web-server and NetMon instance's network ports. This can be retrieved via Horizon or neutron-cli. Also note the web-server MAC address for service chaining configuration.
-```# neutron port-list```
+
+```
+# neutron port-list
+```
 
 Log into midonet-cli to configure l2insertion of the NetMon image, to protect the web-server
 ```# midonet-cli
