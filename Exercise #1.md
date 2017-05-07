@@ -97,7 +97,7 @@ Retrieve the UUID of both the web-server and NetMon instance's network ports. Th
 # neutron port-show <web-server_UUID>
 ```
 
-Log into midonet-cli to configure l2insertion of the NetMon image, to protect the web-server
+Log into midonet-cli to configure L2-insertion of the NetMon instance for protecting the web-server
 ```# midonet-cli
 midonet-cli> list l2insertion
 midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-open true mac <web-server_MAC> 
