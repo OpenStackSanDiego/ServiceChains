@@ -4,8 +4,8 @@ Some background about this workshop around how it works and why we we put it tog
 
 ## Contacts
 
- * @techcet - Cynthia Thomas - Director of Customer Success with Midokura
- * @johnstudarus - John Studarus - Technical Risk, Compliance, and Security Advisor with JHL Consulting
+ * @github/techcet - Cynthia Thomas - Director of Customer Success with Midokura
+ * @github/johnstudarus - John Studarus - Technical Risk, Compliance, and Security Advisor with JHL Consulting
 
 ## Why Layer 2?
 
