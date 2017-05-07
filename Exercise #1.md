@@ -59,12 +59,12 @@ su to root (sudo su -)
 Startup single line web server via netcat to display the hostname
 This command is available as "hostname-webserver.sh"
 
-# ./hostname-webserver.sh
+``` ./hostname-webserver.sh &```
 
 Log into CirrosClient
 
 Verify that the client can connect to the web server on the CirrosWebServer (curl <web-server_IP>), e.g.:
-$ curl 192.168.2.11
+```$ curl 192.168.2.11```
 
 It should return the hostname.
 
@@ -73,11 +73,11 @@ Log into NetworkMonitor
 
 Run a TCPDump to monitor for traffic to the client.
 
-# tcpdump dst 192.168.100.X
+```# tcpdump dst 192.168.100.X```
 or
-# tcpdump -i eth1
+```# tcpdump -i eth1```
 
-# snort dst 192.168.100.X
+```# snort dst 192.168.100.X```
 
 
 Rerun the curl and validate that the NetworkMonitor does not see the traffic
@@ -87,29 +87,29 @@ Service Chaining
 
 Next, use MidoNet l2insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon image for inspection of web-server traffic.
 Retrieve the UUID of both the web-server and NetMon instance's network ports. This can be retrieved via Horizon or neutron-cli. Also note the web-server MAC address for service chaining configuration.
-# neutron port-list
+```# neutron port-list```
 
 Log into midonet-cli to configure l2insertion of the NetMon image, to protect the web-server
-# midonet-cli
+```# midonet-cli
 midonet-cli> list l2insertion
-midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-open true mac <web-server_MAC>
+midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-open true mac <web-server_MAC>```
 
 Rerun the curl and validate that the NetworkMonitor _does_ see the traffic
 Note: without any security software on the NetMon, the NetMon traffic will drop anything not destined for itself. Observe pings/curl requests arrive on NetMon but not forward on until a decision is made by some security software tool. One simple way to enable forwarding is to use the bridge-utils and create a hairpin.
 
 If not installed, load bridge-utils
-# yum install bridge-utils
-# yum install ebtables 
+```# yum install bridge-utils
+# yum install ebtables ```
 
 Create a hairpin and prevent dupes
-# brctl addbr br0
+```# brctl addbr br0
 # brctl addif br0 eth1
 # brctl stp br0 on
 # brctl hairpin br0 eth1 on
 # ifconfig br0 up
 #
 # ebtables -L
-# ebtables -P OUTPUT DROP
+# ebtables -P OUTPUT DROP```
 
 Rerun the curl and validate that the NetworkMonitor _does_ see the traffic with tcpdump, and the client receives the requested information.
 ```
