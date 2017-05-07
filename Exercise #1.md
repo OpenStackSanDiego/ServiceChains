@@ -10,16 +10,17 @@ In this first exercise we'll be adding a rule to move traffic through a virtual 
   * Monitor inbound web (HTTP) traffic from the client to web
   * Utilize service chains to monitor the packet flows
 
-# Image login info:
+# Prereq
+Networking Setup
+  * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
+  * Setup the external and internal networking
+
+Image login info
 
   * admin/openstack for the CirrosWeb image
   * admin/openstack for the NetMon image
 
-# Prereq
-  * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
-  * Setup the external and internal networking
-
-# Network Setup
+# Lab Setup
 
 The NetMon machine will need multiple ports: at least one for management and one for data to process the traffic.
 
@@ -103,7 +104,7 @@ Note: without any security software on the NetMon, the NetMon traffic will drop 
 
 One simple way to enable forwarding is to use the bridge-utils and create a hairpin.
 
-If not installed, load bridge-utils
+If not installed, load bridge-utils and ebtables
 ```# yum install bridge-utils
 # yum install ebtables ```
 
