@@ -86,6 +86,6 @@ https://docs.openstack.org/user-guide/dashboard-launch-instances.html
 * Associate a floating IP to the new Cirros image
 * Connect to the Cirros image using SSH from your laptop with username: admin and password: openstack
 
-If you can login OK, then external networking is all setup and you can proceed to exercise #1.
+If you can login OK, then external networking is all setup and you can proceed to exercise #1 https://github.com/OpenStackSanDiego/ServiceChains/blob/master/Exercise%20%231.md.
 
 
