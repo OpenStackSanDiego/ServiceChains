@@ -37,11 +37,11 @@ Instances
 
 Startup the following three images and assign floating IPs to all.
 
-| Instance Name | Image         | Flavor  | Network(s)      | Floating IP |Additional Interfaces|
+| Instance Name | Image         | Flavor  | Network(s)      | Floating IP | Interfaces          |
 | ------------- |:-------------:| -------:|----------------:|------------:|--------------------:|
-| Client        | CirrosWeb     | m1.tiny | internal        |  assign     | none                |
-| WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | none                |
-| NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | p1, p2, p3          |
+| Client        | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                |
+| WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                |
+| NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | eth0, eth1          |
 
 Create ports to use for the NetMon machine, or alternatively use Horizon to attach the NetMon image to the correct network.
 Note: the management and data port can be inconspicuous to the web-server's network. The administrator has the discretion to attach the NetMon interfaces on separate networks. If desired, NetMon management and service-port networks can be created prior to launching the NetMon image.
@@ -95,7 +95,23 @@ midonet-cli> list l2insertion
 midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-open true mac <web-server_MAC>
 
 Rerun the curl and validate that the NetworkMonitor _does_ see the traffic
+Note: without any security software on the NetMon, the NetMon traffic will drop anything not destined for itself. Observe pings/curl requests arrive on NetMon but not forward on until a decision is made by some security software tool. One simple way to enable forwarding is to use the bridge-utils and create a hairpin.
 
+If not installed, load bridge-utils
+# yum install bridge-utils
+# yum install ebtables 
+
+Create a hairpin and prevent dupes
+# brctl addbr br0
+# brctl addif br0 eth1
+# brctl stp br0 on
+# brctl hairpin br0 eth1 on
+# ifconfig br0 up
+#
+# ebtables -L
+# ebtables -P OUTPUT DROP
+
+Rerun the curl and validate that the NetworkMonitor _does_ see the traffic with tcpdump, and the client receives the requested information.
 ```
 Notes...
 
