@@ -45,7 +45,7 @@ Using the IP address assigned above, connect and log into the Horizon web interf
 Each workshop lab environment has been allocated a set of IP addresses with external connectivity.
 These IP addresses need to be setup within OpenStack.
 
-Please refer to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/blob/master/Workshop%20External%20Subnets.csv">Workshop External Subnets"</A> to find your assigned IP addresses. We've provided some scripts to setup the external and internal networking. However, you'll need to update the external networking script with your specific assigned IP addresses.
+Please refer to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/blob/master/Workshop%20External%20Subnets.csv" target="_blank">Workshop External Subnets</A> to find your assigned IP addresses. We've provided some scripts to setup the external and internal networking. However, you'll need to update the external networking script with your specific assigned IP addresses.
 
 ### Load the OpenStack priviledges
 ```bash
@@ -54,14 +54,21 @@ $ sudo su -
 ```
 
 ### Add an external floating IP network
-* Edit the ext-net.sh with the assigned IP range from the Workshop External Subnet above
-* Source ext-net.sh to setup the floating IP addresses
+
+Update and execute the script to configure the external networking with the IP subnet assigned to your lab.
+
+* Lookup your assigned network in the following table: <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/blob/master/Workshop%20External%20Subnets.csv" target="_blank">Workshop External Subnets</A>
+* Edit ext-net.sh with the assigned IP range from the Workshop External Subnet above
+* Update EXTERNAL_NETWORK_CIDR, FLOATING_IP_START, FLOATING_IP_END, and EXTERNAL_NETWORK_GATEWAY
+* Execute ext-net.sh to setup the floating IP addresses
 ```
 # vi ext-net.sh
 # source ext-net.sh
 ```
 
 ### Add an internal tenant network
+
+Execute the script to setup the internal tenant network and set its gateway to use the new external subnet assigned above.
 * Source int-net.sh to setup the internal tenant network
 ```bash
 # source int-net.sh
