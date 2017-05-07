@@ -96,7 +96,8 @@ Retrieve the UUID of both the web-server and NetMon instance's network ports. Th
 Log into midonet-cli to configure l2insertion of the NetMon image, to protect the web-server
 ```# midonet-cli
 midonet-cli> list l2insertion
-midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-open true mac <web-server_MAC>```
+midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-open true mac <web-server_MAC> 
+```
 
 Rerun the curl and validate that the NetworkMonitor _does_ see the traffic
 Note: without any security software on the NetMon, the NetMon traffic will drop anything not destined for itself. Observe pings/curl requests arrive on NetMon but not forward on until a decision is made by some security software tool. 
