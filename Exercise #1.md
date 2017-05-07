@@ -1,5 +1,5 @@
 
-Exercise 1 - Inline Network Monitor
+# Exercise 1 - Inline Network Monitor
 
 # Overview
 
@@ -11,30 +11,19 @@ In this first exercise we'll be adding a rule to move traffic through a virtual 
   * Utilize service chains to monitor the packet flows
 
 # Prereq
-Networking Setup
+##Networking Setup
   * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
   * Setup the external and internal networking
-
-Image login info
-
+##Image login info
   * admin/openstack for the CirrosWeb image
   * admin/openstack for the NetMon image
+  * admin/openstack for the physical server
 
-# Lab Setup
+# Login & Credentials
 
 The NetMon machine will need multiple ports: at least one for management and one for data to process the traffic.
 
-Log into the OpenStack controller via SSH
-Your lab controller will be of the form ewrXXX.openstacksandiego.us
-Replace XXX with your lab number and include the leading zeroes (i.e. ewr007.openstacksandiego.us)
-Use the admin/openstack credential
-
-Load the OpenStack credentials
-```bash
-source keystonerc_admin
-```
-
-Instances
+# Instances
 
 Startup the following three images and assign floating IPs to all.
 
@@ -46,69 +35,89 @@ Startup the following three images and assign floating IPs to all.
 
 Assign floating IPs all three instances (specifically the management interface of the NetMon).
 
-Log into CirrosWebServer
-su to root (sudo su -)
-Startup single line web server via netcat to display the hostname
-This command is available as "hostname-webserver.sh"
+## Startup the Web Server
+* Log into CirrosWebServer via SSH using the assigned floating IP
+* su to root to gain superuser privileges
+```bash
+$ sudo su -
+```
+* Startup the web server via the command "hostname-webserver.sh"
+```bash
+# ./hostname-webserver.sh &
+```
 
-``` ./hostname-webserver.sh &```
+## Initial web-server Test
 
-# Initial web-server Test
+We'll startup a small web server that simply responds back with a hostname string. This is simply to simulate a web server and to give us some traffic to monitor.
 
-Log into CirrosClient
+* Log into CirrosClient via SSH using the assigned floating IP
+* Verify that the client can connect to the web server on the CirrosWebServer private IP
+```bash
+$ curl 192.168.2.XXX
+```
+* Verify that the hostname of the web server is returned as the response from the remote Web Server
 
-Verify that the client can connect to the web server on the CirrosWebServer (curl <web-server_IP>), e.g.:
+## Network Traffic Monitoring
 
-```$ curl 192.168.2.11```
+Next we'll introduce a virtual machine with some network monitoring tools installed (tcpdump and snort)
 
-It should return the hostname.
+* Log into NetMon server via SSH using the assigned floating IP 
+* Run a TCPDump to monitor for traffic to the client.
 
+```bash
+% sudo su -
+# tcpdump dst 192.168.100.X
+# tcpdump -i eth1
+# snort dst 192.168.100.X
+```
 
-Log into NetworkMonitor 
-
-Run a TCPDump to monitor for traffic to the client.
-
-```# tcpdump dst 192.168.100.X```
-or
-```# tcpdump -i eth1```
-
-```# snort dst 192.168.100.X```
-
-
-Rerun the curl and validate that the NetworkMonitor does not see the traffic
+Rerun the curl and validate that the NetworkMonitor does not see the traffic with each of the three tcpdump and snort commands. Each monitor can be stopped with a control-c.
 
 
-# Service Chaining
+## Service Chaining
 
 Next, use MidoNet l2insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon instance for inspection of web-server traffic.
-Retrieve the UUID of both the web-server and NetMon instance's network ports. This can be retrieved via Horizon or neutron-cli. Also note the web-server MAC address for service chaining configuration.
 
-```
-# neutron port-list
-# neutron port-show <web-server_UUID>
+
+* Log into the physical OpenStack controller via SSH (ewrXXX.openstacksandiego.us)
+* Load the OpenStack credentials
+```bash
+% sudo su -
+# source keystonerc_admin
 ```
 
-Log into midonet-cli to configure L2-insertion of the NetMon instance for protecting the web-server
-```# midonet-cli
+* Retrieve the UUID of both the web-server and NetMon instance's network ports. This can be retrieved via Horizon or neutron-cli. Also note the web-server MAC address for service chaining configuration.
+```bash
+% neutron port-list
+% neutron port-show <web-server_UUID>
+```
+
+* Via the midonet-cli configure L2-insertion of the NetMon instance for protecting the web-server
+```bash
+# midonet-cli
 midonet-cli> list l2insertion
 midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-open true mac <web-server_MAC> 
 ```
 
-Rerun the curl and validate that the NetworkMonitor _does_ see the traffic
-Note: without any security software on the NetMon, the NetMon traffic will drop anything not destined for itself. Observe pings/curl requests arrive on NetMon but not forward on until a decision is made by some security software tool. 
+* Return to NetMon and restart the tcpdump and/or snort commands to monitor traffic
+* Return to Client and rerun the curl commands to generate some network traffic
+* Validate that the NetworkMonitor _does_ see the traffic
+
+However, traffic will traverse fully between the client and web servers. Network traffic arrives on NetMon but not forward on until a decision is made by some security software tool or the interfaces are bridged to allow traffic to pass. This allows the NetMon virtual machine to block malicious traffic (i.e. via Snort rules). We'll next see how to bridge traffic through the interfaces.
 
 #  NetMon Policy Examples
 
 One simple way to enable forwarding is to use the bridge-utils and create a hairpin.
 
-If not installed, load bridge-utils and ebtables
-```
+* Install bridge-utils and ebtables on NetMon
+```bash
+% sudo su -
 # yum install bridge-utils
 # yum install ebtables 
 ```
 
-Create a hairpin and prevent dupes
-```
+* Create a hairpin and prevent dupes
+```bash
 # brctl addbr br0
 # brctl addif br0 eth1
 # brctl stp br0 on
@@ -119,8 +128,9 @@ Create a hairpin and prevent dupes
 # ebtables -P OUTPUT DROP
 ```
 
-Rerun the curl and validate that the NetworkMonitor _does_ see the traffic with tcpdump, and the client receives the requested information.
+* Rerun the curl and validate that the NetworkMonitor _does_ see the traffic with tcpdump, and the client receives the requested information.
 
+## 
 Example NetMon policy via snort
 
 Disable hairpin, if done in previous step.
