@@ -44,15 +44,6 @@ Startup the following three images and assign floating IPs to all.
 | WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                |
 | NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | eth0, eth1          |
 
-Create ports to use for the NetMon machine, or alternatively use Horizon to attach the NetMon image to the correct network.
-Note: the management and data port can be inconspicuous to the web-server's network. The administrator has the discretion to attach the NetMon interfaces on separate networks. If desired, NetMon management and service-port networks can be created prior to launching the NetMon image.
-
-```bash
-neutron port-create --name p1 internal
-neutron port-create --name p2 internal
-neutron port-create --name p3 internal
-```
-
 Assign floating IPs all three instances (specifically the management interface of the NetMon).
 
 Log into CirrosWebServer
