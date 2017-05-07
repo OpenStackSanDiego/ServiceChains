@@ -62,7 +62,7 @@ This command is available as "hostname-webserver.sh"
 
 ``` ./hostname-webserver.sh &```
 
-# Initial Web-server Test
+# Initial web-server Test
 
 Log into CirrosClient
 
@@ -106,7 +106,7 @@ midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-
 Rerun the curl and validate that the NetworkMonitor _does_ see the traffic
 Note: without any security software on the NetMon, the NetMon traffic will drop anything not destined for itself. Observe pings/curl requests arrive on NetMon but not forward on until a decision is made by some security software tool. 
 
-# Example of NetMon allow policy
+#  NetMon Policy Examples
 
 One simple way to enable forwarding is to use the bridge-utils and create a hairpin.
 
