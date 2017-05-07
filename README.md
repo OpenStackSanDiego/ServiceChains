@@ -1,6 +1,6 @@
 # ServiceChains
 
-Overview
+## Overview
 
 This workshop will teach you how to use network rule chains to push traffic through security functions. This allows security functions, such as network monitors, IDS/IPS, web filters and web proxies, to be placed inline with the network traffic without having to route traffic through layer 3 IPs.
 
@@ -10,11 +10,11 @@ The MidoNet neutron plugin has been installed to allow the service chaining. For
 
 This workshop consists of a number of exercises going from the basics through more advanced configurations. Once you've completed the steps below to familiarize your self and configure the lab, please proceed to the exercises.
 
-Cloud Assignments
+## Cloud Assignments
 
 Each workshop attendee is provided an OpenStack cloud preconfigured with the required networking plugins to support service chains. When you arrive at the workshop, you'll be assigned a lab number (i.e. 001), a server name (i.e. ewr001.openstacksandiego.us) and a password.
 
-SSH Login
+### SSH Login
 
 Using the IP address assigned above, connect using an SSH client to the OpenStack controller using an SSH client such as PuTTY. PuTTY for Windows can be downloaded at http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html.
 
@@ -25,7 +25,7 @@ $ sudo su -
 # cat keystone_admin
 ```
 
-Horizon Login
+### Horizon Login
 
 Using the IP address assigned above, connect and log into the Horizon web interface at
 * http://<YOUR_OPENSTACK_IP/horizon
@@ -33,7 +33,7 @@ Using the IP address assigned above, connect and log into the Horizon web interf
 * User Name: admin
 * Password: <ADMIN_PASSWORD>
 
-External Network Setup
+## External Network Setup
 
 Each workshop lab environment has been allocated a set of IP addresses with external connectivity.
 These IP addresses need to be setup within OpenStack.
@@ -67,7 +67,7 @@ $ sudo su -
 ** Rule: SSH CIDR: YOUR_IP
 ** Rule: HTTP CIDR: YOUR_IP
 
-Test External Network Setup
+## Test External Network Setup
 
 For instructions on how to launch instances, please see:
 https://docs.openstack.org/user-guide/dashboard-launch-instances.html
