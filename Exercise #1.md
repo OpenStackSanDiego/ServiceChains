@@ -107,18 +107,22 @@ Note: without any security software on the NetMon, the NetMon traffic will drop 
 One simple way to enable forwarding is to use the bridge-utils and create a hairpin.
 
 If not installed, load bridge-utils and ebtables
-```# yum install bridge-utils
-# yum install ebtables ```
+```
+# yum install bridge-utils
+# yum install ebtables 
+```
 
 Create a hairpin and prevent dupes
-```# brctl addbr br0
+```
+# brctl addbr br0
 # brctl addif br0 eth1
 # brctl stp br0 on
 # brctl hairpin br0 eth1 on
 # ifconfig br0 up
 #
 # ebtables -L
-# ebtables -P OUTPUT DROP```
+# ebtables -P OUTPUT DROP
+```
 
 Rerun the curl and validate that the NetworkMonitor _does_ see the traffic with tcpdump, and the client receives the requested information.
 ```
