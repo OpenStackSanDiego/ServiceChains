@@ -1,25 +1,25 @@
 
 Exercise 1 - Inline Network Monitor
 
-Overview
+# Overview
 
 In this first exercise we'll be adding a rule to move traffic through a virtual machine configured with TCPDump and Snort. These are two network monitoring tools. This exercise walks through the basics of setting up your first set of chain rules.
 
-Goals
+# Goals
 
   * Monitor inbound web (HTTP) traffic from the client to web
   * Utilize service chains to monitor the packet flows
 
-Image login info:
+# Image login info:
 
   * admin/openstack for the CirrosWeb image
   * admin/openstack for the NetMon image
 
-Prereq
+# Prereq
   * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
   * Setup the external and internal networking
 
-Network Setup
+# Network Setup
 
 The NetMon machine will need multiple ports: at least one for management and one for data to process the traffic.
 
@@ -61,6 +61,8 @@ This command is available as "hostname-webserver.sh"
 
 ``` ./hostname-webserver.sh &```
 
+# Initial Web-server Test
+
 Log into CirrosClient
 
 Verify that the client can connect to the web server on the CirrosWebServer (curl <web-server_IP>), e.g.:
@@ -83,9 +85,9 @@ or
 Rerun the curl and validate that the NetworkMonitor does not see the traffic
 
 
-Service Chaining
+# Service Chaining
 
-Next, use MidoNet l2insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon image for inspection of web-server traffic.
+Next, use MidoNet l2insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon instance for inspection of web-server traffic.
 Retrieve the UUID of both the web-server and NetMon instance's network ports. This can be retrieved via Horizon or neutron-cli. Also note the web-server MAC address for service chaining configuration.
 ```# neutron port-list```
 
@@ -95,7 +97,11 @@ midonet-cli> list l2insertion
 midonet-cli> l2insertion add port <web-server_UUID> srv-port <NetMon_UUID> fail-open true mac <web-server_MAC>```
 
 Rerun the curl and validate that the NetworkMonitor _does_ see the traffic
-Note: without any security software on the NetMon, the NetMon traffic will drop anything not destined for itself. Observe pings/curl requests arrive on NetMon but not forward on until a decision is made by some security software tool. One simple way to enable forwarding is to use the bridge-utils and create a hairpin.
+Note: without any security software on the NetMon, the NetMon traffic will drop anything not destined for itself. Observe pings/curl requests arrive on NetMon but not forward on until a decision is made by some security software tool. 
+
+# Example of NetMon allow policy
+
+One simple way to enable forwarding is to use the bridge-utils and create a hairpin.
 
 If not installed, load bridge-utils
 ```# yum install bridge-utils
