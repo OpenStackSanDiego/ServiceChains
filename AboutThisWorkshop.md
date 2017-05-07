@@ -17,6 +17,8 @@ This workshop provides all the tools needed to deploy a number of open source se
 
 This lab consists of an OpenStack cloud with the open-source Midonet neutron plugin. This plugin allows for layer 2 manipulation of traffic. Using Terraform and the Midonet Aomi set of playbooks, each lab is configured with a physical server with a full OpenStack installation. More about Midonet is available at http://www.midokura.com/midonet/
 
+The MidoNet neutron plugin has been installed to allow the service chaining. For more information about rule chains in MidoNet, please read: https://docs.midonet.org/docs/latest-en/operations-guide/content/index.html
+
 ## Hardware and Internet Networking with Packet
 
 Thank you to Packet Hosting (www.packet.net) for providing the underlying bare metal as a service to run this lab. Physical servers are allocated (one physical server per lab) using the Packet APIs via Terraform. Packet provided each physical server/lab a /29 subnet to be used for external Internet connectivity (configured via OpenStack external networking). More about Packet is available at http://www.packet.net
