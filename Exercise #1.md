@@ -94,6 +94,7 @@ Retrieve the UUID of both the web-server and NetMon instance's network ports. Th
 
 ```
 # neutron port-list
+# neutron port-show <web-server_UUID>
 ```
 
 Log into midonet-cli to configure l2insertion of the NetMon image, to protect the web-server
