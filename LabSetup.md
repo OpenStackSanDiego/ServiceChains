@@ -12,10 +12,11 @@ These steps will take you through setting up your OpenStack cloud lab environmen
 
 Lab Details
   * Know the lab # that you've been assigned (i.e. lab007)
-  * Login info
-  ** admin/openstack for the CirrosWeb image
-  ** admin/openstack for the NetMon image
-  ** admin/openstack for the physical server
+
+## Login info
+  * admin/openstack for the CirrosWeb image
+  * admin/openstack for the NetMon image
+  * admin/openstack for the physical server
 
 ### SSH Login
 
