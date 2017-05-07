@@ -136,7 +136,7 @@ Disable hairpin, if done in previous step.
 ```
 brctl hairpin br0 eth1 off
 ```
-Backup default snort.conf and replace with minimum config in `etc/snort/snort.conf`
+Backup default snort.conf and replace with minimum config in `/etc/snort/snort.conf`
 ```
 # Setup the network addresses you are protecting
 ipvar HOME_NET 192.168.100.6
