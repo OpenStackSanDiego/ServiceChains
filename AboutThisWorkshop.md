@@ -4,7 +4,7 @@ Some background about this workshop around how it works and why we we put it tog
 
 ## Contacts
 
- * @_techcet_ - Cynthia Thomas - Director of Customer Success with Midokura
+ * @\_techcet\_ - Cynthia Thomas - Director of Customer Success with Midokura
  * @johnstudarus - John Studarus - Technical Risk, Compliance, and Security Advisor with JHL Consulting
 
 ## Why Layer 2?
@@ -20,7 +20,9 @@ This lab consists of an OpenStack cloud with the open-source MidoNet neutron plu
 The MidoNet neutron plugin has been installed to allow the service chaining. For more information about rule chains in MidoNet, please read: https://docs.midonet.org/docs/latest-en/operations-guide/content/index.html
 
 Here's some other MidoNet references:
+
 Join our Slack channel! https://midonet.slack.com/
+
 MidoNet community page: https://www.midonet.org/
 
 ## Hardware and Internet Networking with Packet
