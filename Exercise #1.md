@@ -49,7 +49,8 @@ Startup the following three images and assign floating IPs to all.
 | WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                |                                  |
 | NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | eth0, eth1          | eth0 to mgmt and eth1 to service | 
 
-Assign floating IPs all three instances. The NetMon floating IP will be to eth0 on the mgmt network.
+Ensure floating IPs are assigned to all instances. Associate the NetMon floating IP to the mgmt network (eth0).
+
 
 ## Startup the Web Server
 * Log into CirrosWebServer via SSH using the assigned floating IP
