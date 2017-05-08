@@ -35,23 +35,24 @@ Networking Setup:
   midonet-cli> l2insertion l2insertionX delete
   ```
 
-Image login info:
+# Image login info
 
   * admin/openstack for the NetMon images
   * no login available for the IoT boxes - consider it a black box!
 
 # Lab Setup
 
-Instances
+## Instances
 
-Startup the following three images and assign floating IPs to all.
+Startup the following three images and assign floating IPs.
 
-| Instance Name | Image         | Flavor   | Network  | Floating IP |
-| ------------- |:-------------:| --------:|---------:|------------:|
-| IoT           | IoT           | m1.small | internal |  assign     |
-| NetMon-1      | NetMon        | m1.small | internal |  assign     |
-| NetMon-2      | NetMon        | m1.small | internal |  assign     |
+| Instance Name | Image         | Flavor   | Network           | Floating IP |
+| ------------- |:-------------:| --------:|------------------:|------------:|
+| IoT           | IoT           | m1.small | internal          | none        |
+| NetMon-1      | NetMon        | m1.small | mgmt,service	     | assign	eth0 |
+| NetMon-2      | NetMon        | m1.small | mgmt,service	     | assign eth0 |
 
+## Service Chaining
 
 Use L2 service-insertion or port-mirroring to monitor rogue traffic on the network on the NetMon instance. Protect other networks by inserting a NetMon for traffic routing out of the network via the gateway.
 
@@ -61,13 +62,14 @@ Use `neutron-cli` or Horizon to determine the network gateway port UUID and MAC 
 # neutron port-show <rogue-network-gateway_UUID>
 ```
 
-Use `midonet-cli` to create Service Chaining of routed traffic by protecting the network gateway, or alternatively port-mirroring to observe rogue traffic:
+Use `midonet-cli` to create Service Chaining of routed traffic by protecting the network gateway.
   ```
   # midonet-cli
   midonet-cli> list l2insertion
   midonet-cli> l2insertion add port <rogue-network-gw_UUID> srv-port <NetMon_UUID> fail-open true mac <rogue-network-gw_MAC> 
  ```
  
+ ## Network Monitoring
  Monitor traffic on the NetMon to determine the source and destination IP of the rogue traffic. 
  
  ```
@@ -86,13 +88,5 @@ If using a 3rd party software like snort on the first NetMon instance, you can l
  ``` 
  
 Log into NetMon2 and observe if the NetMon1 policy is enforced.
- 
- 
 
-
-
-
-
-
-
-
+From here feel free to use the tools in the workshop to experiment as you wish!
