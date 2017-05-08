@@ -41,6 +41,26 @@ Ensure floating IPs are assigned to all instances. Associate the NetMon floating
 Next we'll introduce a second virtual machine with some network monitoring tools installed (tcpdump and snort)
 
 * Log into Snort server via SSH using the assigned floating IP 
+
+* Enable Packet Bridging
+
+One simple way to enable packet forwarding is to use the bridge-utils and create a hairpin.
+
+* Install bridge-utils on Snort instance
+```bash
+% sudo su -
+# yum install bridge-utils
+```
+
+* Create a hairpin on the Snort
+```bash
+# brctl addbr br0
+# brctl addif br0 eth1
+# brctl stp br0 on
+# brctl hairpin br0 eth1 on
+# ifconfig br0 up
+```
+
 * Run a Snort to monitor for traffic to the client.
 
 ```bash
@@ -83,24 +103,6 @@ midonet-cli> l2insertion add port <web-server-port-UUID> srv-port <Snort-port-UU
 
 However, traffic will not traverse between the client and web servers. Network traffic arrives on NetMon but not forward on until a decision is made by some security software tool or the interfaces are bridged to allow traffic to pass. This allows the NetMon virtual machine to block malicious traffic. Next we'll see how to bridge traffic through the interfaces.
 
-#  Enable Packet Bridging
-
-One simple way to enable packet forwarding is to use the bridge-utils and create a hairpin.
-
-* Install bridge-utils and ebtables on NetMon
-```bash
-% sudo su -
-# yum install bridge-utils
-```
-
-* Create a hairpin and prevent dupes
-```bash
-# brctl addbr br0
-# brctl addif br0 eth1
-# brctl stp br0 on
-# brctl hairpin br0 eth1 on
-# ifconfig br0 up
-```
 
 * Rerun the curl and validate that the Snort _does_ see the traffic, and the client receives the requested information.
 
