@@ -21,21 +21,35 @@ In this first exercise we'll be adding a rule to move traffic through a virtual 
   * admin/openstack for the NetMon image
   * admin/openstack for the physical server
 
-# Login & Credentials
+## Add a service network
 
-The NetMon machine will need multiple ports: at least one for management and one for data to process the traffic.
+Execute the script to create a service network. This network will be used to inspect the network traffic.
+
+* Source int-net.sh to setup the internal tenant network
+```bash
+# source service-net.sh
+```
+
+## Add a management service network
+
+Execute the script to create a management network. This network will be used to connect to the network monitoring instances.
+
+* Source int-net.sh to setup the internal tenant network
+```bash
+# source mgmt-net.sh
+```
 
 # Instances
 
-Startup the following three images and assign floating IPs to all.
+Startup the following three images and assign floating IPs to all. 
 
-| Instance Name | Image         | Flavor  | Network(s)      | Floating IP | Interfaces          | Notes                        |
-| ------------- |:-------------:| -------:|----------------:|------------:|--------------------:|-----------------------------:|
-| Client        | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                | reuse from previous exercise |
-| WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                |                              |
-| NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | eth0, eth1          |                              |
+| Instance Name | Image         | Flavor  | Network(s)      | Floating IP | Interfaces          | Notes                            |
+| ------------- |:-------------:| -------:|----------------:|------------:|--------------------:|---------------------------------:|
+| Client        | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                | reuse from previous exercise     |
+| WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                |                                  |
+| NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | eth0, eth1          | eth0 to mgmt and eth1 to service | 
 
-Assign floating IPs all three instances (specifically the management interface of the NetMon).
+Assign floating IPs all three instances. The NetMon floating IP will be to eth0 on the mgmt network.
 
 ## Startup the Web Server
 * Log into CirrosWebServer via SSH using the assigned floating IP
