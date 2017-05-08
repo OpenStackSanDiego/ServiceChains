@@ -74,7 +74,7 @@ Next, use MidoNet L2-insertion to enable service chaining. Specifically, protect
 ```bash
 # midonet-cli
 midonet-cli> list l2insertion
-midonet-cli> l2insertion add port <web-server-port-UUID> srv-port <Snort-port-UUID> fail-open true mac <web-server-MAC> 
+midonet-cli> l2insertion add port <web-server-port-UUID> srv-port <Snort-port-UUID> fail-open true mac <web-server-MAC> pos 1 
 ```
 
 * Return to Snort and restart the snort commands to monitor traffic
