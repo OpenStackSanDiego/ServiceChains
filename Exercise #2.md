@@ -83,7 +83,7 @@ Next, use MidoNet L2-insertion again service chain the Snort instanace. Specific
 ```
 
 * Retrieve the UUID of both the web-server and Snort instance's network ports. Again, this can be retrieved via Horizon or `neutron-cli`. Also note the web-server MAC address for service chaining configuration.
-* Via Horizon Network->Networks->internal->Ports and select the port ID corresponding to the web server and Snort IP addresses for the web-server-port-UUID, Snort-port-UUID MAC address.
+* Via Horizon Network->Networks->internal->Ports and select the port ID corresponding to the web server and Snort IP addresses for the web-server-port-UUID & MAC address, and the Snort-port-UUID.
 ```bash
 % neutron port-list
 % neutron port-show <web-server-port-UUID>
