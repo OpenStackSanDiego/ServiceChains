@@ -50,7 +50,7 @@ Please refer to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/
 ### Load the OpenStack priviledges
 ```bash
 $ sudo su -
-# source ~/keystone_admin.sh
+# source ~/keystonerc_admin
 ```
 
 ### Add an external floating IP network
