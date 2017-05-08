@@ -1,4 +1,4 @@
-Exercise 3 - Malicious IoT Detection and Blocking
+# Exercise 3 - Malicious IoT Detection and Blocking
 
 # Overview
 
@@ -22,8 +22,9 @@ No login credentials are provided for the IoT box. You should consider it a blac
 
 # Prereq
 Networking Setup:
-  * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
-  * Setup the external and internal networking
+  * Leverage the network security groups to allow SSH and HTTP to the project from your laptop external network (done in Lab Setup)
+  * Leverage the external, internal, security management & service networking (done in Lab Setup)
+  
   * Use NetMon hairpin to enable initial pass-through of rogue traffic
   ```
   brctl hairpin br0 eth1 on
@@ -73,7 +74,7 @@ Use `midonet-cli` to create Service Chaining of routed traffic by protecting the
  Monitor traffic on the NetMon to determine the source and destination IP of the rogue traffic. 
  
  ```
-# tcpdump -i eth1
+# tcpdump -i eth1 not port 22
 # whois <rogue-traffic-dst_IP>
 ```
 
