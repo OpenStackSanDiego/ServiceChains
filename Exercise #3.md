@@ -1,4 +1,4 @@
-Exercise 2 - Malicious IoT Detection and Blocking
+Exercise 3 - Malicious IoT Detection and Blocking
 
 # Overview
 
