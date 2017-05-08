@@ -21,20 +21,20 @@ In this first exercise we'll be adding a rule to move traffic through a virtual 
   * admin/openstack for the NetMon image
   * admin/openstack for the physical server
 
-## Add a service network
+## Add a security service network
 
 Execute the script to create a service network. This network will be used to inspect the network traffic.
 
-* Source int-net.sh to setup the internal tenant network
+* Source service-net.sh to setup the security service network
 ```bash
 # source service-net.sh
 ```
 
-## Add a management service network
+## Add a security management network
 
 Execute the script to create a management network. This network will be used to connect to the network monitoring instances.
 
-* Source int-net.sh to setup the internal tenant network
+* Source mgmt-net.sh to setup the security management network
 ```bash
 # source mgmt-net.sh
 ```
