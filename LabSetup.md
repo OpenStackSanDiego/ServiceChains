@@ -24,12 +24,12 @@ Using the IP address assigned above, connect using an SSH client to the OpenStac
 
 * ssh to your physical server (ewrXXX.openstacksandiego.us) replacing XXX with your lab number.
 
-Once logged into the physical server, view the keystone_admin file and note the password. The password is set as the variable OS_PASSWORD (export OS_PASSWORD=<ADMIN_PASSWORD>).
+Once logged into the physical server, view the keystonerc_admin file and note the password. The password is set as the variable OS_PASSWORD (export OS_PASSWORD=<ADMIN_PASSWORD>).
 
 * record the admin password
 
 ```bash
-# cat keystone_admin
+# cat keystonerc_admin
 ```
 
 ### Horizon Login
