@@ -64,7 +64,7 @@ Create a hairpin on the Snort instance
 
 ```bash
 % sudo su -
-# snort XYZ
+# snort -i eth1
 ```
 
 Rerun the curl and validate that the NetworkMonitor does not see the traffic with the tcpdump commands. The monitor can be stopped with a control-c.
