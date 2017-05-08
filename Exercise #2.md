@@ -34,7 +34,7 @@ Startup the following three images and assign floating IPs to all.
 | NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | eth0, eth1          | reuse from previous exercise     | 
 | Snort         | NetMon        | m1.small| mgmt,service    |  assign     | eth0, eth1          | new machine for this exercise    | 
 
-Assign floating IPs all three instances. The NetMon floating IP will be to eth0 on the mgmt network.
+Ensure floating IPs are assigned to all instances. Associate the NetMon floating IP to the mgmt network (eth0) and similarly for the Snort instance.
 
 ## Network Traffic Monitoring
 
