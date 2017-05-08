@@ -44,7 +44,7 @@ Next we'll introduce a second virtual machine with some network monitoring tools
 
 * Enable Packet Bridging
 
-One simple way to enable packet forwarding is to use the bridge-utils and create a hairpin. Install bridge-utils on Snort instance:
+One simple way to enable packet forwarding is to use the bridge-utils and create a hairpin. Install bridge-utils on the Snort instance:
 
 ```bash
 % sudo su -
