@@ -72,7 +72,7 @@ Rerun the curl and validate that the NetworkMonitor does not see the traffic wit
 
 ## Service Chaining
 
-Next, use MidoNet L2-insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon instance for inspection of web-server traffic.
+Next, use MidoNet L2-insertion again service chain the Snort instanace. Specifically, reuse the NetMon instance for inspection of web-server traffic again, and follow up by chaining the Snort instance.
 
 
 * Log into the physical OpenStack controller via SSH (ewrXXX.openstacksandiego.us)
@@ -82,7 +82,7 @@ Next, use MidoNet L2-insertion to enable service chaining. Specifically, protect
 # source keystonerc_admin
 ```
 
-* Retrieve the UUID of both the web-server and NetMon instance's network ports. This can be retrieved via Horizon or neutron-cli. Also note the web-server MAC address for service chaining configuration.
+* Retrieve the UUID of both the web-server and Snort instance's network ports. Again, this can be retrieved via Horizon or `neutron-cli`. Also note the web-server MAC address for service chaining configuration.
 * Via Horizon Network->Networks->internal->Ports and select the port ID corresponding to the web server and Snort IP addresses for the web-server-port-UUID, Snort-port-UUID MAC address.
 ```bash
 % neutron port-list
@@ -98,9 +98,9 @@ midonet-cli> l2insertion add port <web-server-port-UUID> srv-port <Snort-port-UU
 
 * Return to Snort and restart the snort commands to monitor traffic
 * Return to Client and rerun the curl commands to generate some network traffic
-* Validate that Snort _does_ see the traffic
 
-However, traffic will not traverse between the client and web servers. Network traffic arrives on NetMon but not forward on until a decision is made by some security software tool or the interfaces are bridged to allow traffic to pass. This allows the NetMon virtual machine to block malicious traffic. Next we'll see how to bridge traffic through the interfaces.
+
+Network traffic arrives on NetMon and then forwarded to the Snort instance for further inspection.
 
 
 * Rerun the curl and validate that the Snort _does_ see the traffic, and the client receives the requested information.
