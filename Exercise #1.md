@@ -82,12 +82,10 @@ Next we'll introduce a virtual machine with some network monitoring tools instal
 
 ```bash
 % sudo su -
-# tcpdump dst 192.168.100.X
 # tcpdump -i eth1
-# snort dst 192.168.100.X
 ```
 
-Rerun the curl and validate that the NetworkMonitor does not see the traffic with each of the three tcpdump and snort commands. Each monitor can be stopped with a control-c.
+Rerun the curl and validate that the NetworkMonitor does not see the traffic with the tcpdump commands. The monitor can be stopped with a control-c.
 
 
 ## Service Chaining
