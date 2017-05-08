@@ -82,7 +82,7 @@ Next we'll introduce a virtual machine with some network monitoring tools instal
 
 ```bash
 % sudo su -
-# tcpdump -i eth1
+# tcpdump -i eth1 not port 22
 ```
 
 Rerun the curl and validate that the NetworkMonitor does not see the traffic with the tcpdump commands. The monitor can be stopped with a control-c.
