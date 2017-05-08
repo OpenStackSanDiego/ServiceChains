@@ -4,20 +4,24 @@ Some background about this workshop around how it works and why we we put it tog
 
 ## Contacts
 
- * @techcet - Cynthia Thomas - Director of Customer Success with Midokura
+ * @_techcet_ - Cynthia Thomas - Director of Customer Success with Midokura
  * @johnstudarus - John Studarus - Technical Risk, Compliance, and Security Advisor with JHL Consulting
 
 ## Why Layer 2?
 
 I (John) got involved with OpenStack when a client asked me to put together a bundle of multiple underlying security products (i.e. an IDS/IPS/DDOS/DLP combo of multiple products/VMs) that could quickly and seamlessly be deployed into a customers virtual private cloud. Normally this would be done at layer three (IP) and route traffic through various devices. Unfortunately, this requires reconfiguration of the customers network as these additional networks are introduced. This is best done at layer 2 allowing virtualized security solutions to be slipped in and out of the traffic flow without requiring any changes to the layer 3 networking. This lead me to looking at OpenStack Neutron plugins that allow for such layer 2 manipulation of traffic.
 
-This workshop provides all the tools needed to deploy a number of open source security products within an OpenStack layer two cloud. This includes a full OpenStack cloud, an OpenStack neutron plugin with layer two support (Midonet), some open source security tools and the instructions to make it all happen.
+This workshop provides all the tools needed to deploy a number of open source security products within an OpenStack layer two cloud. This includes a full OpenStack cloud, an OpenStack neutron plugin with layer two support (MidoNet), some open source security tools and the instructions to make it all happen.
 
-## OpenStack with Midonet Plugin
+## OpenStack with MidoNet Plugin
 
-This lab consists of an OpenStack cloud with the open-source Midonet neutron plugin. This plugin allows for layer 2 manipulation of traffic. Using Terraform and the Midonet Aomi set of playbooks, each lab is configured with a physical server with a full OpenStack installation. More about Midonet is available at http://www.midokura.com/midonet/
+This lab consists of an OpenStack cloud with the open-source MidoNet neutron plugin. This plugin allows for layer 2 manipulation of traffic. Using Terraform and the MidoNet Aomi set of playbooks, each lab is configured with a physical server with a full OpenStack installation. More about MidoNet is available at http://www.midokura.com/midonet/
 
 The MidoNet neutron plugin has been installed to allow the service chaining. For more information about rule chains in MidoNet, please read: https://docs.midonet.org/docs/latest-en/operations-guide/content/index.html
+
+Here's some other MidoNet references:
+Join our Slack channel! https://midonet.slack.com/
+MidoNet community page: https://www.midonet.org/
 
 ## Hardware and Internet Networking with Packet
 
