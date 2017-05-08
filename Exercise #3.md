@@ -21,6 +21,11 @@ No login credentials are provided for the IoT box. You should consider it a blac
   * Snort usage information: http://www.manpagez.com/man/8/snort/
 
 # Prereq
+Install the `whois` client
+```
+# yum install whois
+```
+
 Networking Setup:
   * Leverage the network security groups to allow SSH and HTTP to the project from your laptop external network (done in Lab Setup)
   * Leverage the external, internal, security management & service networking (done in Lab Setup)
