@@ -74,6 +74,12 @@ $ curl 192.168.2.XXX
 ```
 * Verify that the hostname of the web server is returned as the response from the remote Web Server
 
+## Deallocate the floating IP from web-server
+
+To conserve floating IPs, we'll deallocate the floating IP address from the web server so it can be used for a NetMon instance in a later exercise.
+
+* Deallocate the floating IP from web-server via Horizon
+
 ## Network Traffic Monitoring
 
 Next we'll introduce a virtual machine with some network monitoring tools installed (tcpdump and snort)
