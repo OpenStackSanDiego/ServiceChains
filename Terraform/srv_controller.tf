@@ -4,7 +4,7 @@ terraform {
 }
 
 resource "packet_device" "controller" {
-  count = "${var.server_count}"
+#  count = "${var.server_count}"
 
   hostname = "${format("ewr%03d", count.index + 1)}"
 
@@ -53,15 +53,4 @@ resource "packet_device" "controller" {
         "/tmp/install_openstack.sh",
        ]
   }
-}
-
-resource "dnsimple_record" "controller" {
-  count  = "${var.server_count}"
-
-  domain = "openstacksandiego.us"
-  name   = "${element(packet_device.controller.*.hostname, count.index)}"
-  value  = "${element(packet_device.controller.*.network.0.address, count.index)}"
-
-  type   = "A"
-  ttl    = 3600
 }
