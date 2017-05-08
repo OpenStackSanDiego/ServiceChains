@@ -64,7 +64,7 @@ Next, use MidoNet L2-insertion to enable service chaining. Specifically, protect
 ```
 
 * Retrieve the UUID of both the web-server and NetMon instance's network ports. This can be retrieved via Horizon or neutron-cli. Also note the web-server MAC address for service chaining configuration.
-* Via Horizon Network->Networks->internal->Ports and select the port ID corresponding to the web server and NetMon IP addresses for the web-server-port-UUID, NetMon-port-UUID MAC address.
+* Via Horizon Network->Networks->internal->Ports and select the port ID corresponding to the web server and Snort IP addresses for the web-server-port-UUID, Snort-port-UUID MAC address.
 ```bash
 % neutron port-list
 % neutron port-show <web-server-port-UUID>
@@ -74,18 +74,18 @@ Next, use MidoNet L2-insertion to enable service chaining. Specifically, protect
 ```bash
 # midonet-cli
 midonet-cli> list l2insertion
-midonet-cli> l2insertion add port <web-server-port-UUID> srv-port <NetMon-port-UUID> fail-open true mac <web-server-MAC> 
+midonet-cli> l2insertion add port <web-server-port-UUID> srv-port <Snort-port-UUID> fail-open true mac <web-server-MAC> 
 ```
 
-* Return to NetMon and restart the tcpdump commands to monitor traffic
+* Return to Snort and restart the snort commands to monitor traffic
 * Return to Client and rerun the curl commands to generate some network traffic
-* Validate that the NetworkMonitor _does_ see the traffic
+* Validate that Snort _does_ see the traffic
 
 However, traffic will not traverse between the client and web servers. Network traffic arrives on NetMon but not forward on until a decision is made by some security software tool or the interfaces are bridged to allow traffic to pass. This allows the NetMon virtual machine to block malicious traffic. Next we'll see how to bridge traffic through the interfaces.
 
-#  NetMon Policy Examples
+#  Enable Packet Bridging
 
-One simple way to enable forwarding is to use the bridge-utils and create a hairpin.
+One simple way to enable packet forwarding is to use the bridge-utils and create a hairpin.
 
 * Install bridge-utils and ebtables on NetMon
 ```bash
@@ -102,9 +102,9 @@ One simple way to enable forwarding is to use the bridge-utils and create a hair
 # ifconfig br0 up
 ```
 
-* Rerun the curl and validate that the NetworkMonitor _does_ see the traffic with tcpdump, and the client receives the requested information.
+* Rerun the curl and validate that the Snort _does_ see the traffic, and the client receives the requested information.
 
-One you're satisfied that you can direct and monitor traffic proceed to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/blob/master/Exercise%20%232.md">next exercise</A>.
+One you're satisfied that you can direct and monitor traffic proceed to the <A HREF="https://github.com/OpenStackSanDiego/ServiceChains/blob/master/Exercise%20%233.md">next exercise</A>.
 
 
 
