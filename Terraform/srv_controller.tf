@@ -28,6 +28,16 @@ resource "packet_device" "controller" {
   }
   
   provisioner "file" {
+    source      = "mgmt-net.sh"
+    destination = "mgmt-net.sh"
+  }
+  
+  provisioner "file" {
+    source      = "service-net.sh"
+    destination = "service-net.sh"
+  }
+  
+  provisioner "file" {
     source      = "ext-net.sh"
     destination = "ext-net.sh"
   }
