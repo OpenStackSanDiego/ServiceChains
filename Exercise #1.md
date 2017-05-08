@@ -90,7 +90,7 @@ Rerun the curl and validate that the NetworkMonitor does not see the traffic wit
 
 ## Service Chaining
 
-Next, use MidoNet l2insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon instance for inspection of web-server traffic.
+Next, use MidoNet L2-insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon instance for inspection of web-server traffic.
 
 
 * Log into the physical OpenStack controller via SSH (ewrXXX.openstacksandiego.us)
@@ -107,18 +107,18 @@ Next, use MidoNet l2insertion to enable service chaining. Specifically, protect 
 % neutron port-show <web-server-port-UUID>
 ```
 
-* Via the midonet-cli configure L2-insertion of the NetMon instance for protecting the web-server
+* Via the `midonet-cli` configure L2-insertion of the NetMon instance for protecting the web-server
 ```bash
 # midonet-cli
 midonet-cli> list l2insertion
 midonet-cli> l2insertion add port <web-server-port-UUID> srv-port <NetMon-port-UUID> fail-open true mac <web-server-MAC> 
 ```
 
-* Return to NetMon and restart the tcpdump and/or snort commands to monitor traffic
+* Return to NetMon and restart the tcpdump commands to monitor traffic
 * Return to Client and rerun the curl commands to generate some network traffic
 * Validate that the NetworkMonitor _does_ see the traffic
 
-However, traffic will traverse fully between the client and web servers. Network traffic arrives on NetMon but not forward on until a decision is made by some security software tool or the interfaces are bridged to allow traffic to pass. This allows the NetMon virtual machine to block malicious traffic (i.e. via Snort rules). We'll next see how to bridge traffic through the interfaces.
+However, traffic will not traverse between the client and web servers. Network traffic arrives on NetMon but not forward on until a decision is made by some security software tool or the interfaces are bridged to allow traffic to pass. This allows the NetMon virtual machine to block malicious traffic. Next we'll see how to bridge traffic through the interfaces.
 
 #  NetMon Policy Examples
 
