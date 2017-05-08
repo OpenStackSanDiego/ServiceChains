@@ -1,0 +1,16 @@
+TENANT_NETWORK_CIDR="10.100.100.0/24"
+TENANT_NETWORK_GATEWAY="10.100.100.1"
+TENANT_NETWORK_NAME="mgmt"
+TENANT_ROUTER_NAME="mgmt-router"
+
+neutron net-create $TENANT_NETWORK_NAME
+
+neutron subnet-create $TENANT_NETWORK_NAME $TENANT_NETWORK_CIDR \
+  --name $TENANT_NETWORK_NAME \
+  --gateway $TENANT_NETWORK_GATEWAY
+
+neutron router-create $TENANT_ROUTER_NAME
+
+neutron router-interface-add $TENANT_ROUTER_NAME $TENANT_NETWORK_NAME
+
+neutron router-gateway-set $TENANT_ROUTER_NAME ext-net
