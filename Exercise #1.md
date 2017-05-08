@@ -128,7 +128,6 @@ One simple way to enable forwarding is to use the bridge-utils and create a hair
 ```bash
 % sudo su -
 # yum install bridge-utils
-# yum install ebtables 
 ```
 
 * Create a hairpin and prevent dupes
@@ -138,9 +137,6 @@ One simple way to enable forwarding is to use the bridge-utils and create a hair
 # brctl stp br0 on
 # brctl hairpin br0 eth1 on
 # ifconfig br0 up
-#
-# ebtables -L
-# ebtables -P OUTPUT DROP
 ```
 
 * Rerun the curl and validate that the NetworkMonitor _does_ see the traffic with tcpdump, and the client receives the requested information.
