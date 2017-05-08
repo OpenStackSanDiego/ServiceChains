@@ -45,13 +45,14 @@ Networking Setup:
 
 ## Instances
 
-Startup the following three images and assign floating IPs.
+Startup the following images or reuse the NetMon from previous exercises.
 
 | Instance Name | Image         | Flavor   | Network           | Floating IP |
 | ------------- |:-------------:| --------:|------------------:|------------:|
-| IoT           | IoT           | m1.small | internal          | none        |
-| NetMon-1      | NetMon        | m1.small | mgmt,service	     | assign	eth0 |
-| NetMon-2      | NetMon        | m1.small | mgmt,service	     | assign eth0 |
+| IoT-1         | IoT           | m1.small | internal          | none        |
+| IoT-2         | IoT           | m1.small | internal          | none        |
+| NetMon        | NetMon        | m1.small | mgmt,service	     | assign	eth0 |
+
 
 ## Service Chaining
 
@@ -80,14 +81,8 @@ Use `midonet-cli` to create Service Chaining of routed traffic by protecting the
 
 Administratively, there are several options for dealing with rogue traffic: administratively shutting down the rogue VM instance, applying policy in MidoNet via Security Groups or MidoNet rules & chains, or using the service chaining technique to use 3rd-party software to apply policy. Treat traffic to block traffic via Security Groups or snort.
 
-If using a 3rd party software like snort on the first NetMon instance, you can leverage service chaining to observe "post-policy" traffic to determine the polcies are implemented. Use `midonet-cli` to add to the existing service chain, to insert another NetMon image.
+Optionally, if using a 3rd party software like snort on the NetMon instance, you can leverage service chaining to observe "post-policy" traffic to determine the polcies are implemented. As in the previous exercise, you can use `midonet-cli` to add to the existing service chain and insert another NetMon image.
 
-  ```
-  # midonet-cli
-  midonet-cli> list l2insertion
-  midonet-cli> l2insertion add port <rogue-network-gw_UUID> srv-port <NetMon2_UUID> fail-open true mac <rogue-network-gw_MAC> 
- ``` 
- 
-Log into NetMon2 and observe if the NetMon1 policy is enforced.
+Finally, log into the NetMon instance and observe that the policy is enforced.
 
 From here feel free to use the tools in the workshop to experiment as you wish!
