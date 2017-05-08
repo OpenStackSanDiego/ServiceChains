@@ -108,7 +108,7 @@ Next, use MidoNet L2-insertion to enable service chaining. Specifically, protect
 ```
 
 * Retrieve the UUID of both the web-server and NetMon instance's network ports. This can be retrieved via Horizon or neutron-cli. Also note the web-server MAC address for service chaining configuration.
-* Via Horizon Network->Networks->internal->Ports and select the port ID corresponding to the web server and NetMon IP addresses for the web-server-port-UUID, NetMon-port-UUID MAC address.
+* Via Horizon Network->Networks->internal->Ports and select the port ID corresponding to the web server and NetMon IP addresses for the web-server-port-UUID & MAC address, and the NetMon-port-UUID.
 ```bash
 % neutron port-list
 % neutron port-show <web-server-port-UUID>
