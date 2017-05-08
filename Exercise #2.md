@@ -13,8 +13,8 @@ In this exercise you'll be using Snort to monitor and alert when monitoring. Tra
 # Prereq
 
 ## Networking Setup
-  * Setup network security groups to allow SSH and HTTP to the project from your laptop external network
-  * Setup the external and internal networking
+  * Leverage the network security groups to allow SSH and HTTP to the project from your laptop external network (done in Lab Setup)
+  * Leverage the external, internal, security management & service networking (done in Lab Setup)
   
 ## Image login info
   * admin/openstack for the CirrosWeb image
