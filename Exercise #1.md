@@ -29,11 +29,11 @@ The NetMon machine will need multiple ports: at least one for management and one
 
 Startup the following three images and assign floating IPs to all.
 
-| Instance Name | Image         | Flavor  | Network(s)      | Floating IP | Interfaces          |
-| ------------- |:-------------:| -------:|----------------:|------------:|--------------------:|
-| Client        | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                |
-| WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                |
-| NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | eth0, eth1          |
+| Instance Name | Image         | Flavor  | Network(s)      | Floating IP | Interfaces          | Notes                        |
+| ------------- |:-------------:| -------:|----------------:|------------:|--------------------:|-----------------------------:|
+| Client        | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                | reuse from previous exercise |
+| WebServer     | CirrosWeb     | m1.tiny | internal        |  assign     | eth0                |                              |
+| NetMon        | NetMon        | m1.small| mgmt,service    |  assign     | eth0, eth1          |                              |
 
 Assign floating IPs all three instances (specifically the management interface of the NetMon).
 
