@@ -75,7 +75,7 @@ Rerun the curl and validate that the NetworkMonitor does not see the traffic wit
 Next, use MidoNet L2-insertion again service chain the Snort instanace. Specifically, reuse the NetMon instance for inspection of web-server traffic again, and follow up by chaining the Snort instance.
 
 
-* Log into the physical OpenStack controller via SSH (ewrXXX.openstacksandiego.us)
+* Log into the physical OpenStack controller via SSH (labXXX.openstacksandiego.us)
 * Load the OpenStack credentials
 ```bash
 % sudo su -
