@@ -100,7 +100,7 @@ Rerun the curl and validate that the NetworkMonitor does not see the traffic wit
 Next, use MidoNet L2-insertion to enable service chaining. Specifically, protect the web-server by redirecting traffic to the NetMon instance for inspection of web-server traffic.
 
 
-* Log into the physical OpenStack controller via SSH (ewrXXX.openstacksandiego.us)
+* Log into the physical OpenStack controller via SSH (labXXX.openstacksandiego.us)
 * Load the OpenStack credentials
 ```bash
 % sudo su -
