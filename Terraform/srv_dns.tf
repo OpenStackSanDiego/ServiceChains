@@ -8,7 +8,7 @@ resource "dnsimple_record" "controller" {
 
   domain = "openstacksandiego.us"
   name   = "${element(packet_device.controller.*.hostname, count.index)}"
-  value  = "${element(packet_device.controller.*.network.0.address, count.index)}"
+  value  = "${element(packet_device.controller.*.network.access_public_ipv4, count.index)}"
 
   type   = "A"
   ttl    = 3600
